@@ -1,0 +1,158 @@
+{
+  "data": {
+    "userTimeline": [
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T16:00:00",
+        "eventDescription": "2022-07-08T00:00:00.000Z: Test Jul ",
+        "eventSnapshot": "{\"childId\":\"521eb0fd-7ff4-4d9a-a850-0177740c3493\",\"childName\":\"Logan Crawford\",\"eventDate\":\"2022-07-08T00:00:00.000Z\",\"eventTitle\":\"Test Jul \"}",
+        "eventType": "event",
+        "insertedAt": "2022-07-07T15:07:12"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T08:50:57",
+        "eventDescription": "",
+        "eventSnapshot": "{\"activityClass\":\"pee\",\"activityId\":\"4eca57c1-bba9-4b8e-9e1e-e6e32d480665\",\"activitySubType\":\"pee\",\"activityType\":\"potty\",\"childName\":\"Logan Crawford\",\"endTime\":null,\"referenceObject\":{\"type\":\"lp_child_activities.id\",\"value\":\"4eca57c1-bba9-4b8e-9e1e-e6e32d480665\"},\"remarks\":\"\",\"schoolId\":20544,\"startTime\":\"2022-07-07T16:50:57\"}",
+        "eventType": "everydayHealth",
+        "insertedAt": "2022-07-07T17:51:39"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T07:26:00",
+        "eventDescription": "2022-07-07T15:26:00.000Z: School level - Events",
+        "eventSnapshot": "{\"childId\":\"521eb0fd-7ff4-4d9a-a850-0177740c3493\",\"childName\":\"Logan Crawford\",\"eventDate\":\"2022-07-07T15:26:00.000Z\",\"eventTitle\":\"School level - Events\",\"schoolId\":20544,\"schoolName\":\"LittleLives+Demo 1 (Staging)\"}",
+        "eventType": "event",
+        "insertedAt": "2022-07-07T15:27:28"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T07:11:00",
+        "eventDescription": "Logan Crawford just checked out 7 July 2022, 3:11pm",
+        "eventSnapshot": "{\"checkinThumb\":\"https://media-cache-ap-2.littlelives.com/square/580/contain/ffffff/http://littlecheckin.production.s3-ap-southeast-1.amazonaws.com/users/checkin/521eb0fd-7ff4-4d9a-a850-0177740c3493/checkin_521eb0fd-7ff4-4d9a-a850-0177740c3493_2022_07_07_15_11_55.jpg\",\"checkinUrl\":\"http://littlecheckin.production.s3-ap-southeast-1.amazonaws.com/users/checkin/521eb0fd-7ff4-4d9a-a850-0177740c3493/checkin_521eb0fd-7ff4-4d9a-a850-0177740c3493_2022_07_07_15_11_55.jpg\",\"msgParams\":{\"attendanceRecordId\":\"62c68730-27cc-4716-be1e-44ed0a000189\",\"checkInDate\":\"7 July 2022, 3:11pm\",\"childName\":\"Logan Crawford\",\"rawCheckInDate\":\"2022-07-07 15:11:00\",\"schoolName\":\"LittleLives+Demo 1 (Staging)\"},\"referenceObj\":{\"type\":\"attendance_records.id\",\"value\":\"62c68730-27cc-4716-be1e-44ed0a000189\"},\"schoolId\":20544}",
+        "eventType": "checkOut",
+        "insertedAt": "2022-07-07T15:12:25"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T07:11:00",
+        "eventDescription": "Logan Crawford just checked in 7 July 2022, 3:11pm",
+        "eventSnapshot": "{\"checkinThumb\":\"https://media-cache-ap-2.littlelives.com/square/580/contain/ffffff/http://littlecheckin.production.s3-ap-southeast-1.amazonaws.com/users/checkin/521eb0fd-7ff4-4d9a-a850-0177740c3493/checkin_521eb0fd-7ff4-4d9a-a850-0177740c3493_2022_07_07_15_11_55.jpg\",\"checkinUrl\":\"http://littlecheckin.production.s3-ap-southeast-1.amazonaws.com/users/checkin/521eb0fd-7ff4-4d9a-a850-0177740c3493/checkin_521eb0fd-7ff4-4d9a-a850-0177740c3493_2022_07_07_15_11_55.jpg\",\"msgParams\":{\"attendanceRecordId\":\"62c68730-27cc-4716-be1e-44ed0a000189\",\"checkInDate\":\"7 July 2022, 3:11pm\",\"childName\":\"Logan Crawford\",\"rawCheckInDate\":\"2022-07-07 15:11:00\",\"schoolName\":\"LittleLives+Demo 1 (Staging)\"},\"referenceObj\":{\"type\":\"attendance_records.id\",\"value\":\"62c68730-27cc-4716-be1e-44ed0a000189\"},\"schoolId\":20544}",
+        "eventType": "checkIn",
+        "insertedAt": "2022-07-07T15:12:14"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T07:00:56",
+        "eventDescription": "Logan Crawford has a new learning moment!",
+        "eventSnapshot": "{\"albumId\":\"628355fd-07ec-4f7f-a57e-4168ac180149\",\"albumName\":\"Summer May 17-01\",\"caption\":\"\",\"childId\":\"521eb0fd-7ff4-4d9a-a850-0177740c3493\",\"childName\":\"Logan Crawford\",\"fileId\":\"62c684a8-81d8-4c43-b128-48b70a000189\",\"imageUrl\":\"https://ll-staging-oss.oss-ap-southeast-1.aliyuncs.com/medias/20544/62c684a8-7364-48b8-846b-4d270a000189.JPEG\",\"referenceObj\":{\"type\":\"media_tags.id\",\"value\":\"de139884-083f-0f96-4fc9-a393f7f3ca14\"},\"schoolId\":20544,\"schoolName\":\"LittleLives+Demo 1 (Staging)\",\"teacherName\":\"LittleLives Admin\"}",
+        "eventType": "portfolio",
+        "insertedAt": "2022-07-07T15:25:46"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T06:58:34",
+        "eventDescription": "You have a Story PDF ready for download.",
+        "eventSnapshot": "{\"exp\":\"2022-07-14T06:58:34\",\"school_id\":20544,\"url\":\"https://s3.ap-southeast-1.amazonaws.com/ll.staging/preview/b87348c9-1317-4d11-a484-e487ec5df8e3.pdf\"}",
+        "eventType": "story_exported",
+        "insertedAt": "2022-07-07T06:58:34"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T06:24:00",
+        "eventDescription": "2022-07-07T14:24:00.000Z: school level events",
+        "eventSnapshot": "{\"childId\":\"521eb0fd-7ff4-4d9a-a850-0177740c3493\",\"childName\":\"Logan Crawford\",\"eventDate\":\"2022-07-07T14:24:00.000Z\",\"eventTitle\":\"school level events\",\"schoolId\":20544,\"schoolName\":\"LittleLives+Demo 1 (Staging)\"}",
+        "eventType": "event",
+        "insertedAt": "2022-07-07T15:24:57"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T05:55:00",
+        "eventDescription": "2022-07-07T13:55:00.000Z: Event at Class Level 02",
+        "eventSnapshot": "{\"childId\":\"521eb0fd-7ff4-4d9a-a850-0177740c3493\",\"childName\":\"Logan Crawford\",\"eventDate\":\"2022-07-07T13:55:00.000Z\",\"eventTitle\":\"Event at Class Level 02\"}",
+        "eventType": "event",
+        "insertedAt": "2022-07-07T14:56:33"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-07T05:52:00",
+        "eventDescription": "2022-07-07T13:52:00.000Z: Event at School level Jul07-01",
+        "eventSnapshot": "{\"childId\":\"521eb0fd-7ff4-4d9a-a850-0177740c3493\",\"childName\":\"Logan Crawford\",\"eventDate\":\"2022-07-07T13:52:00.000Z\",\"eventTitle\":\"Event at School level Jul07-01\"}",
+        "eventType": "event",
+        "insertedAt": "2022-07-07T14:52:45"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-05T07:05:59",
+        "eventDescription": "Staff Admin'production uploaded a new story (DO NOT EDIT) The Sunny Schoolhouse",
+        "eventSnapshot": "{\"publisher_id\":\"5e6aee2f-765c-49f2-bfff-47faac1802d7\",\"publisher_name\":\"Staff Admin'production\",\"school_id\":20544,\"story_id\":184,\"story_image\":\"\",\"story_name\":\"(DO NOT EDIT) The Sunny Schoolhouse\"}",
+        "eventType": "story_published",
+        "insertedAt": "2022-07-05T07:05:59"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-04T05:20:20",
+        "eventDescription": "Dot's Dad uploaded a new story (DO NOT EDIT) The Sunny Schoolhouse",
+        "eventSnapshot": "{\"publisher_id\":\"19f0a272-0179-11e2-aa28-080027ca8774\",\"publisher_name\":\"Dot's Dad\",\"school_id\":20544,\"story_id\":184,\"story_image\":\"https://s3.ap-southeast-1.amazonaws.com/six-littlelives-stg/media/eb4d1921-2405-47c4-ba67-9b5672e67da5/5-canh-dong-hanh-toi-mua-hanh-4191-5672-1653965069.jpeg\",\"story_name\":\"(DO NOT EDIT) The Sunny Schoolhouse\"}",
+        "eventType": "story_published",
+        "insertedAt": "2022-07-04T05:20:20"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-04T03:37:01",
+        "eventDescription": "You have a Story PDF ready for download.",
+        "eventSnapshot": "{\"exp\":\"2022-07-11T03:37:01\",\"school_id\":20544,\"url\":\"https://s3.ap-southeast-1.amazonaws.com/ll.staging/preview/e1dfc12f-9080-44ee-b5da-a76c5274e57f.pdf\"}",
+        "eventType": "story_exported",
+        "insertedAt": "2022-07-04T03:37:01"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-01T03:44:00",
+        "eventDescription": "2022-07-01T11:44:00.000Z: School Staging 01",
+        "eventSnapshot": "{\"childId\":\"521eb0fd-7ff4-4d9a-a850-0177740c3493\",\"childName\":\"Logan Crawford\",\"eventDate\":\"2022-07-01T11:44:00.000Z\",\"eventTitle\":\"School Staging 01\",\"schoolId\":20544,\"schoolName\":\"LittleLives+Demo 1 (Staging)\"}",
+        "eventType": "event",
+        "insertedAt": "2022-07-01T12:44:57"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-01T03:10:54",
+        "eventDescription": "You have a Story PDF ready for download.",
+        "eventSnapshot": "{\"exp\":\"2022-07-08T03:10:54\",\"school_id\":20544,\"url\":\"https://s3.ap-southeast-1.amazonaws.com/ll.staging/preview/426a6403-e621-4152-95da-e12602ddf1f5.pdf\"}",
+        "eventType": "story_exported",
+        "insertedAt": "2022-07-01T03:10:54"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-01T03:01:00",
+        "eventDescription": "2022-07-01T11:01:00.000Z: Event at School level ",
+        "eventSnapshot": "{\"childId\":\"521eb0fd-7ff4-4d9a-a850-0177740c3493\",\"childName\":\"Logan Crawford\",\"eventDate\":\"2022-07-01T11:01:00.000Z\",\"eventTitle\":\"Event at School level \",\"schoolId\":20544,\"schoolName\":\"LittleLives+Demo 1 (Staging)\"}",
+        "eventType": "event",
+        "insertedAt": "2022-07-01T12:02:19"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-01T02:55:30",
+        "eventDescription": "You have a Story PDF ready for download.",
+        "eventSnapshot": "{\"exp\":\"2022-07-08T02:55:30\",\"school_id\":20544,\"url\":\"https://s3.ap-southeast-1.amazonaws.com/ll.staging/preview/7f748972-da1b-4ae9-b352-ee7bb0c66842.pdf\"}",
+        "eventType": "story_exported",
+        "insertedAt": "2022-07-01T02:55:30"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-01T02:54:57",
+        "eventDescription": "You have a Story PDF ready for download.",
+        "eventSnapshot": "{\"exp\":\"2022-07-08T02:54:57\",\"school_id\":20544,\"url\":\"https://s3.ap-southeast-1.amazonaws.com/ll.staging/preview/54f46450-73d3-4dbc-a85b-cee392b53992.pdf\"}",
+        "eventType": "story_exported",
+        "insertedAt": "2022-07-01T02:54:57"
+      },
+      {
+        "__typename": "UserEvent",
+        "eventDate": "2022-07-01T02:44:00",
+        "eventDescription": "2022-07-01T10:44:00.000Z: Event at class level Jul 01",
+        "eventSnapshot": "{\"childId\":\"521eb0fd-7ff4-4d9a-a850-0177740c3493\",\"childName\":\"Logan Crawford\",\"eventDate\":\"2022-07-01T10:44:00.000Z\",\"eventTitle\":\"Event at class level Jul 01\"}",
+        "eventType": "event",
+        "insertedAt": "2022-07-01T11:45:05"
+      }
+    ]
+  }
+}
