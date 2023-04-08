@@ -1,3 +1,5 @@
 package com.example.littlelivesassignment.data.model
 
-// data class Event()
+class EventData {
+
+}
