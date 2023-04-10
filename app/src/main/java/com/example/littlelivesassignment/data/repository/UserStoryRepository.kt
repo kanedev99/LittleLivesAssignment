@@ -1,5 +1,6 @@
 package com.example.littlelivesassignment.data.repository
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -10,6 +11,7 @@ import com.example.littlelivesassignment.data.remote.ApiService
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+private const val TAG = "UserStoryRepository"
 class UserStoryRepository @Inject constructor(
     private val service: ApiService,
     private val database: EventDatabase
@@ -20,7 +22,8 @@ class UserStoryRepository @Inject constructor(
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getEventsResultStream(): Flow<PagingData<Event>> {
+    fun getEventsResult(): Flow<PagingData<Event>> {
+        Log.d(TAG, "getEventsResult: Entry")
         val pagingSourceFactory = { database.eventDao().getEventList() }
 
         return Pager(

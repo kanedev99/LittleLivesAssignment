@@ -1,5 +1,6 @@
 package com.example.littlelivesassignment.data.repository
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -11,20 +12,26 @@ import com.example.littlelivesassignment.data.model.Event
 import com.example.littlelivesassignment.data.remote.ApiService
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
+import javax.inject.Singleton
 
 private const val STARTING_PAGE_INDEX = 1
+private const val TAG = "UserStoryRemoteMediator"
 
 @OptIn(ExperimentalPagingApi::class)
-class UserStoryRemoteMediator(
+@Singleton
+class UserStoryRemoteMediator @Inject constructor(
     private val service: ApiService,
     private val eventDatabase: EventDatabase
 ) : RemoteMediator<Int, Event>() {
 
     override suspend fun initialize(): InitializeAction {
+        Log.d(TAG, "initialize: Entry")
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Event>): MediatorResult {
+        Log.d(TAG, "load: Entry")
 
         val page = when (loadType) {
             LoadType.REFRESH -> {
@@ -49,6 +56,7 @@ class UserStoryRemoteMediator(
             val apiResponse = service.getData(page, state.config.pageSize)
 
             val events = apiResponse.data.userTimeline
+            Log.d(TAG, "load: events = $events")
             val endOfPaginationReached = events.isEmpty()
             eventDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -72,11 +80,13 @@ class UserStoryRemoteMediator(
     }
 
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Event>): RemoteKeys? {
+        Log.d(TAG, "getRemoteKeyForLastItem: Entry")
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { event -> eventDatabase.remoteKeysDao().remoteKeysEventId(event.id) }
     }
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Event>): RemoteKeys? {
+        Log.d(TAG, "getRemoteKeyForFirstItem: Entry")
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { event -> eventDatabase.remoteKeysDao().remoteKeysEventId(event.id) }
     }
@@ -84,6 +94,7 @@ class UserStoryRemoteMediator(
     private suspend fun getRemoteKeyClosestToCurrentPosition(
         state: PagingState<Int, Event>
     ): RemoteKeys? {
+        Log.d(TAG, "getRemoteKeyClosestToCurrentPosition: Entry")
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { eventId ->
                 eventDatabase.remoteKeysDao().remoteKeysEventId(eventId)

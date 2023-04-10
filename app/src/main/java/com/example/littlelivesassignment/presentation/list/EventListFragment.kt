@@ -9,7 +9,6 @@ import com.example.littlelivesassignment.R
 
 class EventListFragment : Fragment() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
