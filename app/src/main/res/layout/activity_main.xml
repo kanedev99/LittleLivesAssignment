@@ -11,7 +11,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvEvents"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_event"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>

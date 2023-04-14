@@ -1,6 +1,7 @@
 package com.example.littlelivesassignment.data.remote
 
 import android.content.Context
+import com.google.gson.JsonParser
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -12,9 +13,11 @@ class MockDataInterceptor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val responseString = readJsonFromAssets(context, filename)
+        val parser = JsonParser()
+        val jsonObject = parser.parse(responseString).asJsonObject
         return Response.Builder()
             .code(200)
-            .message(responseString)
+            .message(jsonObject.toString())
             .request(chain.request())
             .protocol(Protocol.HTTP_1_1)
             .body(

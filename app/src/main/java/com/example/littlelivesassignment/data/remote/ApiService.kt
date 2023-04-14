@@ -10,8 +10,8 @@ interface ApiService {
     suspend fun getData(
         @Query("page") page: Int,
         @Query("per_page") itemsPerPage: Int
-    ): UserStoryResponse
+    ): Response<UserStoryResponse>
 
     @GET("some/path2")
-    suspend fun getData(): UserStoryResponse
+    suspend fun getData(): Response<UserStoryResponse>
 }

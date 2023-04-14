@@ -2,27 +2,27 @@ package com.example.littlelivesassignment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.littlelivesassignment.data.model.UserEvent
 import com.example.littlelivesassignment.databinding.ItemEventBinding
 
-class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.EventViewHolder>(EventsDiffCallback()) {
+class EventListAdapter: ListAdapter<UserEvent, EventListAdapter.EventListViewHolder>(EventsDiffCallback()) {
 
-    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: EventListViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
-        return EventViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventListViewHolder {
+        return EventListViewHolder(
             ItemEventBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-    inner class EventViewHolder(private val binding: ItemEventBinding): ViewHolder(binding.root) {
+    inner class EventListViewHolder(private val binding: ItemEventBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: UserEvent) {
             binding.root.bind(item)
         }
@@ -37,6 +37,4 @@ class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.EventViewHolder>(E
             return oldItem == newItem
         }
     }
-
-
 }

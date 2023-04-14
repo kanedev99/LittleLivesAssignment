@@ -6,9 +6,9 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.example.littlelivesassignment.data.local.db.EventDatabase
+import com.example.littlelivesassignment.data.local.db.UserEventDatabase
 import com.example.littlelivesassignment.data.local.entity.RemoteKeys
-import com.example.littlelivesassignment.data.model.Event
+import com.example.littlelivesassignment.data.model.UserEvent
 import com.example.littlelivesassignment.data.remote.ApiService
 import retrofit2.HttpException
 import java.io.IOException
@@ -22,15 +22,15 @@ private const val TAG = "UserStoryRemoteMediator"
 @Singleton
 class UserStoryRemoteMediator @Inject constructor(
     private val service: ApiService,
-    private val eventDatabase: EventDatabase
-) : RemoteMediator<Int, Event>() {
+    private val userEventDatabase: UserEventDatabase
+) : RemoteMediator<Int, UserEvent>() {
 
     override suspend fun initialize(): InitializeAction {
         Log.d(TAG, "initialize: Entry")
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, Event>): MediatorResult {
+    override suspend fun load(loadType: LoadType, state: PagingState<Int, UserEvent>): MediatorResult {
         Log.d(TAG, "load: Entry")
 
         val page = when (loadType) {
@@ -55,21 +55,25 @@ class UserStoryRemoteMediator @Inject constructor(
         try {
             val apiResponse = service.getData(page, state.config.pageSize)
 
-            val events = apiResponse.data.userTimeline
+            val events = apiResponse.body()?.data?.userTimeline
             Log.d(TAG, "load: events = $events")
-            val endOfPaginationReached = events.isEmpty()
-            eventDatabase.withTransaction {
+            val endOfPaginationReached = events?.isEmpty() ?: true
+            userEventDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    eventDatabase.remoteKeysDao().clearRemoteKeys()
-                    eventDatabase.eventDao().clearEvents()
+                    userEventDatabase.remoteKeysDao().clearRemoteKeys()
+                    userEventDatabase.eventDao().clearEvents()
                 }
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (endOfPaginationReached) null else page + 1
-                val keys = events.map {
+                val keys = events?.map {
                     RemoteKeys(eventId = it.id, prevKey = prevKey, nextKey = nextKey)
                 }
-                eventDatabase.remoteKeysDao().insertAll(keys)
-                eventDatabase.eventDao().insertAll(events)
+                if (keys != null) {
+                    userEventDatabase.remoteKeysDao().insertAll(keys)
+                }
+                if (events != null) {
+                    userEventDatabase.eventDao().insertAll(events)
+                }
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {
@@ -79,25 +83,25 @@ class UserStoryRemoteMediator @Inject constructor(
         }
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Event>): RemoteKeys? {
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, UserEvent>): RemoteKeys? {
         Log.d(TAG, "getRemoteKeyForLastItem: Entry")
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
-            ?.let { event -> eventDatabase.remoteKeysDao().remoteKeysEventId(event.id) }
+            ?.let { event -> userEventDatabase.remoteKeysDao().remoteKeysEventId(event.id) }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Event>): RemoteKeys? {
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, UserEvent>): RemoteKeys? {
         Log.d(TAG, "getRemoteKeyForFirstItem: Entry")
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
-            ?.let { event -> eventDatabase.remoteKeysDao().remoteKeysEventId(event.id) }
+            ?.let { event -> userEventDatabase.remoteKeysDao().remoteKeysEventId(event.id) }
     }
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(
-        state: PagingState<Int, Event>
+        state: PagingState<Int, UserEvent>
     ): RemoteKeys? {
         Log.d(TAG, "getRemoteKeyClosestToCurrentPosition: Entry")
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { eventId ->
-                eventDatabase.remoteKeysDao().remoteKeysEventId(eventId)
+                userEventDatabase.remoteKeysDao().remoteKeysEventId(eventId)
             }
         }
     }

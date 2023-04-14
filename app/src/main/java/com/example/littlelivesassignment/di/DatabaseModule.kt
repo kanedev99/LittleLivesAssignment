@@ -3,7 +3,7 @@ package com.example.littlelivesassignment.di
 import android.content.Context
 import com.example.littlelivesassignment.data.local.dao.EventDao
 import com.example.littlelivesassignment.data.local.dao.RemoteKeysDao
-import com.example.littlelivesassignment.data.local.db.EventDatabase
+import com.example.littlelivesassignment.data.local.db.UserEventDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,17 +17,17 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideAppDatabase(@ApplicationContext context: Context): EventDatabase {
-        return EventDatabase.getInstance(context)
+    fun provideAppDatabase(@ApplicationContext context: Context): UserEventDatabase {
+        return UserEventDatabase.getInstance(context)
     }
 
     @Provides
-    fun provideEventDao(appDatabase: EventDatabase): EventDao {
+    fun provideEventDao(appDatabase: UserEventDatabase): EventDao {
         return appDatabase.eventDao()
     }
 
     @Provides
-    fun provideRemoteKeysDao(appDatabase: EventDatabase): RemoteKeysDao {
+    fun provideRemoteKeysDao(appDatabase: UserEventDatabase): RemoteKeysDao {
         return appDatabase.remoteKeysDao()
     }
 }
