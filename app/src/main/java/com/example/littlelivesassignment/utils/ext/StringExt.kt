@@ -8,9 +8,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun String.toDate(): String {
-    val inputDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    val inputDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
     inputDateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val outputDateFormat = SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.ENGLISH)
+    val date = inputDateFormat.parse(this) ?: return ""
+    return outputDateFormat.format(date)
+}
+
+fun String.toTitleDate(): String {
+    val inputDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+    val outputDateFormat = SimpleDateFormat("EEE, MMM dd, yyyy", Locale.ENGLISH)
     val date = inputDateFormat.parse(this) ?: return ""
     return outputDateFormat.format(date)
 }

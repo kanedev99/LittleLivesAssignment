@@ -10,6 +10,7 @@ import com.example.littlelivesassignment.R
 import com.example.littlelivesassignment.adapter.EventAdapter
 import com.example.littlelivesassignment.adapter.EventListAdapter
 import com.example.littlelivesassignment.adapter.decoration.DividerItemDecoration
+import com.example.littlelivesassignment.data.model.UserEvent
 import com.example.littlelivesassignment.databinding.ActivityMainBinding
 import com.example.littlelivesassignment.presentation.list.EventListViewModel
 import com.example.littlelivesassignment.presentation.list.EventListViewModel2
@@ -45,9 +46,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        eventListVM2.events.observe(this, Observer {
-            adapter2.submitList(it)
-        })
+        eventListVM2.events.observe(this) {
+            adapter2.buildDataMap(it)
+            adapter2.notifyDataSetChanged()
+        }
     }
 
     private fun initViews() {
