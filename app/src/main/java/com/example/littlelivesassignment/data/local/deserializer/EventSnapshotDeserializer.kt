@@ -28,7 +28,7 @@ class EventSnapshotDeserializer : JsonDeserializer<EventSnapshot> {
             "checkIn", "checkOut" -> {
                 context?.deserialize<EventSnapshot>(
                     jsonObject.get("eventSnapshot"),
-                    object : TypeToken<AttendanceTrackingEvent>() {}.type
+                    object : TypeToken<AttendanceRecord>() {}.type
                 )
             }
             "everydayHealth" -> {

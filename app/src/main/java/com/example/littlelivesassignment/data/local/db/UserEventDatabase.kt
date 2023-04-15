@@ -18,7 +18,7 @@ import com.example.littlelivesassignment.data.model.*
         RemoteKeys::class,
         ChildEvent::class,
         ActivityEvent::class,
-        AttendanceTrackingEvent::class,
+        AttendanceRecord::class,
         StoryPublishedEvent::class,
         PortfolioEvent::class,
         StoryExportedEvent::class,

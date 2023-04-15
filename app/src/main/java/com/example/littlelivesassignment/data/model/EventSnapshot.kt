@@ -32,10 +32,10 @@ data class ActivityEvent(
     val startTime: String?
 ) : EventSnapshot()
 
-@Entity(tableName = "attendance_tracking_events")
-data class AttendanceTrackingEvent(
+@Entity(tableName = "attendance_records")
+data class AttendanceRecord(
     @PrimaryKey(autoGenerate = true)
-    val attendanceTrackingId: Int = 0,
+    val atdRecordId: Int = 0,
     val checkInthumb: String?,
     val checkinUrl: String?,
     @Embedded

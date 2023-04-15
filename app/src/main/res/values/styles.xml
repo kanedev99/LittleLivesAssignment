@@ -2,6 +2,12 @@
 <resources>
 
     <style name="TitleTextView">
+        <item name="android:textColor">#2c2c2c</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="HeaderTextView">
         <item name="textAllCaps">true</item>
         <item name="android:textColor">@color/title_event</item>
         <item name="android:textSize">16sp</item>
@@ -18,5 +24,26 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <!--  Style toolbar components  -->
+    <style name="ToolBar"/>
+
+    <style name="ToolBar.Button">
+        <item name="android:layout_width">@dimen/tool_bar_action_size</item>
+        <item name="android:layout_height">@dimen/tool_bar_action_size</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/background_ripple_button</item>
+    </style>
+
+    <style name="ToolBar.Title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/tool_bar_text_size</item>
+        <item name="android:textColor">@color/colorTextHeader</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:lineSpacingExtra">4dp</item>
     </style>
 </resources>

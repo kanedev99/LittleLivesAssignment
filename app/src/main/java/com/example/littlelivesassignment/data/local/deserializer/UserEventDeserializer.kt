@@ -35,7 +35,7 @@ class UserEventDeserializer : JsonDeserializer<UserEvent> {
             PORTFOLIO           -> gson.fromJson(eventSnapshotString, PortfolioEvent::class.java)
             EXPORTED_STORY      -> gson.fromJson(eventSnapshotString, StoryExportedEvent::class.java)
             PUBLISHED_STORY     -> gson.fromJson(eventSnapshotString, StoryPublishedEvent::class.java)
-            CHECK_IN, CHECK_OUT -> gson.fromJson(eventSnapshotString, AttendanceTrackingEvent::class.java)
+            CHECK_IN, CHECK_OUT -> gson.fromJson(eventSnapshotString, AttendanceRecord::class.java)
             else -> null
         }
 

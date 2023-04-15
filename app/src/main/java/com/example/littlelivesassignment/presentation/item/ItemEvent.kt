@@ -4,15 +4,15 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.FrameLayout
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.littlelivesassignment.R
-import com.example.littlelivesassignment.data.model.AttendanceTrackingEvent
+import com.example.littlelivesassignment.adapter.listener.AdapterActionListener
+import com.example.littlelivesassignment.adapter.listener.ItemActionListener
+import com.example.littlelivesassignment.data.model.AttendanceRecord
 import com.example.littlelivesassignment.data.model.ChildEvent
 import com.example.littlelivesassignment.data.model.EventType.ACTIVITY
 import com.example.littlelivesassignment.data.model.EventType.CHECK_IN
@@ -39,6 +39,17 @@ class ItemEvent @JvmOverloads constructor(
 
     private val binding by lazy {
         ItemEventBinding.bind(this)
+    }
+
+    interface Callback: ItemActionListener.OnClickItem
+
+    var callback: Callback? = null
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        this.setOnClickListener {
+            callback?.onClickItem()
+        }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -137,7 +148,7 @@ class ItemEvent @JvmOverloads constructor(
         return when(item.type) {
             CHECK_IN -> resources.getString(
                 R.string.user_check_in_description,
-                (item.snapshot as AttendanceTrackingEvent).msgParams.childName,
+                (item.snapshot as AttendanceRecord).msgParams.childName,
                 item.snapshot.msgParams.checkInDate.split(",")[1].uppercase()
             ).run {
                 boldText(item.snapshot.msgParams.childName)
@@ -145,7 +156,7 @@ class ItemEvent @JvmOverloads constructor(
 
             CHECK_OUT -> resources.getString(
                 R.string.user_check_out_description,
-                (item.snapshot as AttendanceTrackingEvent).msgParams.childName,
+                (item.snapshot as AttendanceRecord).msgParams.childName,
                 item.snapshot.msgParams.checkInDate.split(",")[1].uppercase()
             ).run {
                 boldText(item.snapshot.msgParams.childName)
@@ -173,7 +184,7 @@ class ItemEvent @JvmOverloads constructor(
             when(item.type) {
                 CHECK_IN, CHECK_OUT -> {
                     requestManager
-                        .load((item.snapshot as AttendanceTrackingEvent).checkinUrl)
+                        .load((item.snapshot as AttendanceRecord).checkinUrl)
                         .placeholder(R.drawable.placeholder)
                         .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(16)))
                         .into(this)

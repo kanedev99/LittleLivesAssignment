@@ -4,18 +4,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.littlelivesassignment.data.model.UserEvent
+import com.example.littlelivesassignment.adapter.listener.AdapterActionListener
+import com.example.littlelivesassignment.data.model.*
 import com.example.littlelivesassignment.databinding.ItemEventBinding
 import com.example.littlelivesassignment.databinding.ItemEventTitleSectionBinding
+import com.example.littlelivesassignment.presentation.item.ItemEvent
 import com.example.littlelivesassignment.utils.ext.toTitleDate
 
-class EventListAdapter()
+class EventListAdapter
     : RecyclerView.Adapter<EventListAdapter.UserEventViewHolder>() {
 
     private var arrayType = arrayListOf<Int>()
     private var arrayData = arrayListOf<Any>()
+
+    interface Callback :
+        AdapterActionListener.OnRequestEvent,
+        AdapterActionListener.OnRequestAttendanceRecord,
+        AdapterActionListener.OnRequestStoryExported,
+        AdapterActionListener.OnRequestStoryPublished,
+        AdapterActionListener.OnRequestMedia
+
+    var callback: Callback? = null
 
     companion object {
         const val TITLE_SECTION_TYPE    = 1
@@ -78,6 +88,27 @@ class EventListAdapter()
 
     inner class EventListViewHolder(private val binding: ItemEventBinding): UserEventViewHolder(binding.root) {
         override fun bind(item: Any) {
+            binding.root.callback = object: ItemEvent.Callback {
+                override fun onClickItem() {
+                    when ((item as UserEvent).type) {
+                        EventType.CHECK_IN, EventType.CHECK_OUT -> {
+                            callback?.onRequestAttendanceRecord(item.snapshot as AttendanceRecord)
+                        }
+                        EventType.CREATE -> {
+                            callback?.onRequestCreateEvent(item.snapshot as ChildEvent)
+                        }
+                        EventType.PORTFOLIO -> {
+                            callback?.onRequestMedia(item.snapshot as PortfolioEvent)
+                        }
+                        EventType.PUBLISHED_STORY -> {
+                            callback?.onRequestStoryPublished(item.snapshot as StoryPublishedEvent)
+                        }
+                        EventType.EXPORTED_STORY -> {
+                            callback?.onRequestStoryExported(item.snapshot as StoryExportedEvent)
+                        }
+                    }
+                }
+            }
             binding.root.bind(item as UserEvent)
         }
     }

@@ -1,65 +1,45 @@
 package com.example.littlelivesassignment.presentation
 
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
+import android.view.View
+import android.view.Window
+import android.view.WindowInsets
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.example.littlelivesassignment.R
-import com.example.littlelivesassignment.adapter.EventAdapter
-import com.example.littlelivesassignment.adapter.EventListAdapter
-import com.example.littlelivesassignment.adapter.decoration.DividerItemDecoration
-import com.example.littlelivesassignment.data.model.UserEvent
 import com.example.littlelivesassignment.databinding.ActivityMainBinding
-import com.example.littlelivesassignment.presentation.list.EventListViewModel
-import com.example.littlelivesassignment.presentation.list.EventListViewModel2
+import com.example.littlelivesassignment.presentation.list.NewsFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
-private const val TAG = "MainActivity"
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val eventListVM: EventListViewModel by viewModels()
-    private val eventListVM2: EventListViewModel2 by viewModels()
-
     private lateinit var binding: ActivityMainBinding
-
-    private lateinit var adapter: EventAdapter
-    private lateinit var adapter2: EventListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        // Hide title
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+
+        // Hide status and navigation bars
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+        } else {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        }
+
 
         setContentView(binding.root)
 
         initViews()
     }
 
-    override fun onStart() {
-        super.onStart()
-        lifecycleScope.launch {
-            eventListVM.events.collect {
-                adapter.submitData(it)
-            }
-        }
-
-        eventListVM2.events.observe(this) {
-            adapter2.buildDataMap(it)
-            adapter2.notifyDataSetChanged()
-        }
-    }
-
     private fun initViews() {
-        adapter = EventAdapter()
-        adapter2 = EventListAdapter()
-        binding.rcvEvents.apply {
-            adapter = this@MainActivity.adapter2
-            AppCompatResources.getDrawable(this@MainActivity, R.drawable.drawable_line_divider)
-                ?.let { DividerItemDecoration(this@MainActivity, it) }
-                ?.let { addItemDecoration(it) }
-        }
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.fragment_container, NewsFragment.newInstance(null))
+        fragmentTransaction.commit()
     }
 }
