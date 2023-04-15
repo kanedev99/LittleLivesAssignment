@@ -1,6 +1,5 @@
-package com.example.littlelivesassignment.data.local.deserializer
+package com.example.littlelivesassignment.data.deserializer
 
-import android.util.Log
 import com.example.littlelivesassignment.data.model.*
 import com.example.littlelivesassignment.data.model.EventType.ACTIVITY
 import com.example.littlelivesassignment.data.model.EventType.CHECK_IN
@@ -38,8 +37,6 @@ class UserEventDeserializer : JsonDeserializer<UserEvent> {
             CHECK_IN, CHECK_OUT -> gson.fromJson(eventSnapshotString, AttendanceRecord::class.java)
             else -> null
         }
-
-        Log.d("Kane", "deserialize: type = $eventType")
 
         return UserEvent(
             typeName    = jsonObject.get("__typename")?.asString,

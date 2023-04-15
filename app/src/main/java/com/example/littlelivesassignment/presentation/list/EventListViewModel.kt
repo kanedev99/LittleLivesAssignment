@@ -10,6 +10,6 @@ import javax.inject.Inject
 @HiltViewModel
 class EventListViewModel @Inject constructor(private val userStoryRepository: UserStoryRepository): ViewModel() {
 
-    val events = userStoryRepository.getEventsResult().cachedIn(viewModelScope)
+//    val events = userStoryRepository.getEventsResult().cachedIn(viewModelScope)
 
 }

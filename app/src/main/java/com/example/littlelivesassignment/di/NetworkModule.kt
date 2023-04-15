@@ -1,9 +1,7 @@
 package com.example.littlelivesassignment.di
 
 import android.app.Application
-import com.example.littlelivesassignment.data.local.deserializer.EventSnapshotDeserializer
-import com.example.littlelivesassignment.data.local.deserializer.UserEventDeserializer
-import com.example.littlelivesassignment.data.model.EventSnapshot
+import com.example.littlelivesassignment.data.deserializer.UserEventDeserializer
 import com.example.littlelivesassignment.data.model.UserEvent
 import com.example.littlelivesassignment.data.remote.ApiService
 import com.example.littlelivesassignment.data.remote.MockDataInterceptor
