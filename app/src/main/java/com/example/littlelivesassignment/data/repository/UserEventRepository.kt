@@ -3,6 +3,7 @@ package com.example.littlelivesassignment.data.repository
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.littlelivesassignment.adapter.EventListAdapter
 import com.example.littlelivesassignment.data.model.EventType
 import com.example.littlelivesassignment.data.model.UserEvent
 import com.example.littlelivesassignment.data.remote.ApiService
@@ -35,7 +36,22 @@ class UserEventRepository @Inject constructor(
                 page = pageIndex,
                 itemsPerPage = 3
             )
-            val userEvents = response.data.userTimeline.filterNot { it.type == EventType.ACTIVITY || it.type == EventType.PORTFOLIO}
+            val userEvents = response.data.userTimeline
+                .filterNot { it.type == EventType.ACTIVITY || it.type == EventType.PORTFOLIO}
+
+            val eventsByDate = HashMap<String, MutableList<UserEvent>>()
+            val arrayData = arrayListOf<UserEvent>()
+
+            for (event in userEvents) {
+                val dateString = event.date?.substring(0, 10)?: ""
+                if (!eventsByDate.containsKey(dateString)) {
+                    eventsByDate[dateString] = mutableListOf()
+                    arrayData.add(UserEvent(type = EventType.HEADER, date = dateString))
+                }
+                eventsByDate[dateString]?.add(event)
+                arrayData.add(event)
+            }
+
             Log.d("Kane", "load: events size = ${userEvents.size}")
             val nextKey =
                 if (userEvents.isEmpty()) {
@@ -45,7 +61,7 @@ class UserEventRepository @Inject constructor(
                 }
             Log.d("Kane", "load: nextKey = $nextKey")
             LoadResult.Page(
-                data = userEvents,
+                data    = arrayData,
                 prevKey = if (pageIndex == STARTING_PAGE_INDEX) null else pageIndex,
                 nextKey = nextKey
             )

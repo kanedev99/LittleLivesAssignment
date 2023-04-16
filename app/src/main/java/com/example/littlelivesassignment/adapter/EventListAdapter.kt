@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.littlelivesassignment.adapter.listener.AdapterActionListener
 import com.example.littlelivesassignment.data.model.*
 import com.example.littlelivesassignment.databinding.ItemEventBinding
-import com.example.littlelivesassignment.databinding.ItemEventTitleSectionBinding
 import com.example.littlelivesassignment.utils.ext.toTitleDate
 
 class EventListAdapter
@@ -53,13 +52,13 @@ class EventListAdapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserEventViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when(viewType) {
-            TITLE_SECTION_TYPE -> {
+            /*TITLE_SECTION_TYPE -> {
                 EventTitleSectionViewHolder(
                     ItemEventTitleSectionBinding.inflate(
                         inflater, parent, false
                     )
                 )
-            }
+            }*/
             ITEM_TYPE -> {
                 EventListViewHolder(
                     ItemEventBinding.inflate(
@@ -112,14 +111,14 @@ class EventListAdapter
         }
     }
 
-    inner class EventTitleSectionViewHolder(private val binding: ItemEventTitleSectionBinding): UserEventViewHolder(binding.root) {
+    /*inner class EventTitleSectionViewHolder(private val binding: ItemEventTitleSectionBinding): UserEventViewHolder(binding.root) {
         override fun bind(item: Any) {
             binding.root.apply {
                 text    = (item as String).toTitleDate()
                 alpha   = 0.5f
             }
         }
-    }
+    }*/
 
     private class EventsDiffCallback : DiffUtil.ItemCallback<UserEvent>() {
         override fun areItemsTheSame(oldItem: UserEvent, newItem: UserEvent): Boolean {

@@ -1,6 +1,7 @@
 package com.example.littlelivesassignment.data.model
 
 object EventType {
+    const val HEADER            = "header"
     const val CREATE            = "event"
     const val CHECK_IN          = "checkIn"
     const val CHECK_OUT         = "checkOut"

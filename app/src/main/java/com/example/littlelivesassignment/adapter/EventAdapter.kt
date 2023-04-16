@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.littlelivesassignment.R
 import com.example.littlelivesassignment.data.model.EventType
 import com.example.littlelivesassignment.data.model.UserEvent
-import com.example.littlelivesassignment.databinding.ItemUserEventBinding
-import com.example.littlelivesassignment.presentation.item.*
+import com.example.littlelivesassignment.presentation.item.base.UserEventItem
+import com.example.littlelivesassignment.presentation.item.header.SectionDateItem
+import com.example.littlelivesassignment.presentation.item.news.*
 
 class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolder>(EventsDiffCallback()) {
 
@@ -27,9 +28,9 @@ class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolde
     }
 
     override fun getItemViewType(position: Int) = when (getItem(position)?.type?: "") {
+        EventType.HEADER                        -> TYPE_HEADER_DATE
         EventType.CHECK_IN, EventType.CHECK_OUT -> TYPE_CHECK_IN_OUT
         EventType.CREATE                        -> TYPE_EVENT
-        EventType.PORTFOLIO                     -> TYPE_MEDIA
         EventType.EXPORTED_STORY                -> TYPE_STORY_EXPORTED
         EventType.PUBLISHED_STORY               -> TYPE_STORY_PUBLISHED
         else                                    -> 1000
@@ -38,13 +39,11 @@ class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolde
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserEventViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when(viewType) {
-            /*0 -> {
-                HeaderDateViewHolder(
-                    ItemEventTitleSectionBinding.inflate(
-                        inflater, parent, false
-                    )
+            TYPE_HEADER_DATE -> {
+                SectionDateViewHolder(
+                    inflater.inflate(R.layout.item_section_date, parent, false) as SectionDateItem
                 )
-            }*/
+            }
             TYPE_CHECK_IN_OUT -> {
                 EventViewHolder(
                     inflater.inflate(R.layout.item_attendance_record, parent, false) as AttendanceRecordItem
@@ -54,12 +53,6 @@ class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolde
             TYPE_EVENT -> {
                 EventViewHolder(
                     inflater.inflate(R.layout.item_event, parent, false) as EventItem
-                )
-            }
-
-            TYPE_MEDIA -> {
-                EventViewHolder(
-                    inflater.inflate(R.layout.item_attendance_record, parent, false) as AttendanceRecordItem
                 )
             }
 
@@ -76,8 +69,8 @@ class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolde
             }
 
             else -> {
-                EventViewHolder(
-                    inflater.inflate(R.layout.item_attendance_record, parent, false) as AttendanceRecordItem
+                SectionDateViewHolder(
+                    inflater.inflate(R.layout.item_section_date, parent, false) as SectionDateItem
                 )
             }
 
@@ -91,9 +84,10 @@ class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolde
         open fun bind(data: UserEvent) {}
     }
 
-    inner class HeaderDateViewHolder(private val binding: ItemUserEventBinding): UserEventViewHolder(binding.root) {
-
-        override fun bind(data: UserEvent) {}
+    inner class SectionDateViewHolder(private val item: SectionDateItem): UserEventViewHolder(item) {
+        override fun bind(data: UserEvent) {
+            item.bind(data)
+        }
     }
 
     inner class EventViewHolder(private val item: UserEventItem): UserEventViewHolder(item) {

@@ -1,4 +1,4 @@
-package com.example.littlelivesassignment.presentation.item
+package com.example.littlelivesassignment.presentation.item.base
 
 import android.content.Context
 import android.util.AttributeSet
