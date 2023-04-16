@@ -24,3 +24,6 @@ The app list all user’s stories fetched from an JSON asset file.
 * [Hilt](https://dagger.dev/hilt/) for dependency injection
 * [Retrofit](http://square.github.io/retrofit) for REST api communication
 * [Glide](https://github.com/bumptech/glide) for image loading
+
+# Upcomming
+Using Room database to load data when the network is unavailable with Paging 3. I am currently working on a new feature on the ['db_local'](https://github.com/kanedev99/LittleLivesAssignment/tree/local_db) branch in my GitHub project. I haven't completed it yet.
