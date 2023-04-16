@@ -12,21 +12,21 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitle"
-        style="@style/HeaderTextView"
+        style="@style/TextView.Header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Event" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDescription"
-        style="@style/DescriptionTextView"
+        style="@style/TextView.Description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="This is an event" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btnAction"
-        style="@style/ActionTextView"
+        style="@style/TextView.Action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="12dp"

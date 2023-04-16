@@ -26,14 +26,13 @@ class StoryExportedItem @JvmOverloads constructor(
         ItemStoryExportedBinding.bind(this)
     }
 
-    interface Callback: ItemActionListener.OnClickItem
-
-    var callback: Callback? = null
-
     override fun onFinishInflate() {
         super.onFinishInflate()
         this.setOnClickListener {
             callback?.onClickItem()
+        }
+        binding.btnAction.setOnClickListener {
+            callback?.onClickAction()
         }
     }
 

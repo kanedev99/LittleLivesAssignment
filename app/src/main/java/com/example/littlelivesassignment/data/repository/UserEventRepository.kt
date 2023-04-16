@@ -3,7 +3,6 @@ package com.example.littlelivesassignment.data.repository
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.littlelivesassignment.adapter.EventListAdapter
 import com.example.littlelivesassignment.data.model.EventType
 import com.example.littlelivesassignment.data.model.UserEvent
 import com.example.littlelivesassignment.data.remote.ApiService

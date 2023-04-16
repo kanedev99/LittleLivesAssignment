@@ -8,7 +8,6 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.littlelivesassignment.R
-import com.example.littlelivesassignment.adapter.listener.ItemActionListener
 import com.example.littlelivesassignment.data.model.AttendanceRecord
 import com.example.littlelivesassignment.data.model.EventType
 import com.example.littlelivesassignment.data.model.UserEvent
@@ -30,10 +29,6 @@ class AttendanceRecordItem @JvmOverloads constructor(
     private val binding by lazy {
         ItemAttendanceRecordBinding.bind(this)
     }
-
-    interface Callback: ItemActionListener.OnClickItem
-
-    var callback: Callback? = null
 
     override fun onFinishInflate() {
         super.onFinishInflate()

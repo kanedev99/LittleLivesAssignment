@@ -4,5 +4,7 @@ interface ItemActionListener {
 
     interface OnClickItem {
         fun onClickItem() {}
+
+        fun onClickAction() {}
     }
 }

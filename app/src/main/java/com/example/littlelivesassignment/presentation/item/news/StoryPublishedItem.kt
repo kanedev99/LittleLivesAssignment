@@ -32,10 +32,6 @@ class StoryPublishedItem @JvmOverloads constructor(
         ItemStoryPublishedBinding.bind(this)
     }
 
-    interface Callback: ItemActionListener.OnClickItem
-
-    var callback: Callback? = null
-
     companion object {
         private const val DEMO_IMG_URL = "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx"
     }

@@ -1,4 +1,4 @@
-package com.example.littlelivesassignment.adapter
+package com.example.littlelivesassignment.adapter.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,13 +6,15 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.littlelivesassignment.R
-import com.example.littlelivesassignment.data.model.EventType
-import com.example.littlelivesassignment.data.model.UserEvent
+import com.example.littlelivesassignment.adapter.listener.AdapterActionListener
+import com.example.littlelivesassignment.data.model.*
 import com.example.littlelivesassignment.presentation.item.base.UserEventItem
 import com.example.littlelivesassignment.presentation.item.header.SectionDateItem
 import com.example.littlelivesassignment.presentation.item.news.*
 
-class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolder>(EventsDiffCallback()) {
+class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolder>(
+    EventsDiffCallback()
+) {
 
     companion object {
         const val TYPE_HEADER_DATE      = 0
@@ -22,6 +24,15 @@ class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolde
         const val TYPE_STORY_EXPORTED   = 4
         const val TYPE_STORY_PUBLISHED  = 5
     }
+
+    interface Callback :
+        AdapterActionListener.OnRequestEvent,
+        AdapterActionListener.OnRequestAttendanceRecord,
+        AdapterActionListener.OnRequestStoryExported,
+        AdapterActionListener.OnRequestStoryPublished,
+        AdapterActionListener.OnRequestMedia
+
+    var callback: Callback? = null
 
     override fun onBindViewHolder(holder: UserEventViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
@@ -69,14 +80,8 @@ class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolde
             }
 
             else -> {
-                SectionDateViewHolder(
-                    inflater.inflate(R.layout.item_section_date, parent, false) as SectionDateItem
-                )
-            }
-
-            /*else -> {
                 throw IllegalArgumentException()
-            }*/
+            }
         }
     }
 
@@ -98,6 +103,36 @@ class EventAdapter: PagingDataAdapter<UserEvent, EventAdapter.UserEventViewHolde
                 EventType.EXPORTED_STORY                -> (item as StoryExportedItem).bind(data)
                 EventType.PUBLISHED_STORY               -> (item as StoryPublishedItem).bind(data)
                 else -> {}
+            }
+
+            item.callback = object: UserEventItem.Callback {
+                override fun onClickItem() {
+                    when (data.type) {
+                        EventType.CHECK_IN, EventType.CHECK_OUT -> {
+                            callback?.onRequestAtdRecordDetail(data.snapshot as AttendanceRecord)
+                        }
+                        EventType.CREATE -> {
+                            callback?.onRequestEventDetail(data.snapshot as ChildEvent)
+                        }
+                        EventType.PUBLISHED_STORY -> {
+                            callback?.onRequestStoryPublishedDetail(data.snapshot as StoryPublishedEvent)
+                        }
+                        EventType.EXPORTED_STORY -> {
+                            callback?.onRequestStoryExportedDetail(data.snapshot as StoryExportedEvent)
+                        }
+                    }
+                }
+
+                override fun onClickAction() {
+                    when (data.type) {
+                        EventType.CREATE -> {
+                            callback?.onRequestCreateEvent(data.snapshot as ChildEvent)
+                        }
+                        EventType.EXPORTED_STORY -> {
+                            callback?.onRequestDownloadStory(data.snapshot as StoryExportedEvent)
+                        }
+                    }
+                }
             }
         }
     }

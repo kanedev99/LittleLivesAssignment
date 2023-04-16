@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.littlelivesassignment.R
-import com.example.littlelivesassignment.adapter.EventAdapter
+import com.example.littlelivesassignment.adapter.recycler.EventAdapter
 
 class DividerItemDecoration(context: Context, dividerDrawable: Drawable) : RecyclerView.ItemDecoration() {
     private val mDivider: Drawable = dividerDrawable

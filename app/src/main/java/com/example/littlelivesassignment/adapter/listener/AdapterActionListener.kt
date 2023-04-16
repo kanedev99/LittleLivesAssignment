@@ -5,22 +5,24 @@ import com.example.littlelivesassignment.data.model.*
 interface AdapterActionListener {
 
     interface OnRequestEvent {
+        fun onRequestEventDetail(event: ChildEvent?) {}
         fun onRequestCreateEvent(event: ChildEvent?) {}
     }
 
     interface OnRequestAttendanceRecord {
-        fun onRequestAttendanceRecord(attendanceRecord: AttendanceRecord?) {}
+        fun onRequestAtdRecordDetail(attendanceRecord: AttendanceRecord?) {}
     }
 
     interface OnRequestMedia {
-        fun onRequestMedia(media: PortfolioEvent?) {}
+        fun onRequestMediaDetail(media: PortfolioEvent?) {}
     }
 
     interface OnRequestStoryPublished {
-        fun onRequestStoryPublished(storyPublished: StoryPublishedEvent?) {}
+        fun onRequestStoryPublishedDetail(storyPublished: StoryPublishedEvent?) {}
     }
 
     interface OnRequestStoryExported {
-        fun onRequestStoryExported(storyExported: StoryExportedEvent?) {}
+        fun onRequestStoryExportedDetail(storyExported: StoryExportedEvent?) {}
+        fun onRequestDownloadStory(storyExported: StoryExportedEvent?) {}
     }
 }
