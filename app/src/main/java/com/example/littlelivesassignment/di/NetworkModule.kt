@@ -51,7 +51,6 @@ object NetworkModule {
         //register type adapter
         builder
             .registerTypeAdapter(UserEvent::class.java, UserEventDeserializer())
-//            .registerTypeAdapter(EventSnapshot::class.java, EventSnapshotDeserializer())
         return builder.create()
     }
 }

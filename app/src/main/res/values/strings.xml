@@ -8,8 +8,8 @@
 
     <!-- Check in - out -->
     <string name="check_in_out_title">Check In &amp; Out</string>
-    <string name="user_check_in_description"><b>%s</b> checked in on%s</string>
-    <string name="user_check_out_description"><b>%s</b> checked out on%s</string>
+    <string name="user_check_in_description">%s checked in on%s</string>
+    <string name="user_check_out_description">%s checked out on%s</string>
 
     <!--  Create event  -->
     <string name="create_event_title">Events</string>
@@ -19,5 +19,6 @@
     <string name="portfolio_event_title">Portfolio</string>
 
     <!--  Story Exported  -->
+    <string name="story_exported_event_description">%s %s</string>
 
 </resources>

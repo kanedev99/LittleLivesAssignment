@@ -1,6 +1,7 @@
 package com.example.littlelivesassignment.presentation.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,23 +10,26 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.littlelivesassignment.R
+import com.example.littlelivesassignment.adapter.EventAdapter
 import com.example.littlelivesassignment.adapter.EventListAdapter
 import com.example.littlelivesassignment.adapter.decoration.DividerItemDecoration
 import com.example.littlelivesassignment.data.model.*
 import com.example.littlelivesassignment.databinding.FragmentNewsBinding
 import com.example.littlelivesassignment.presentation.detail.UserEventFragment
-import com.example.littlelivesassignment.utils.ext.gone
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class NewsFragment : Fragment() {
 
-    private val eventListVM: EventListViewModel2 by viewModels()
+    private val userEventViewModel: UserEventViewModel by viewModels()
 
     private lateinit var binding: FragmentNewsBinding
-    private lateinit var adapter: EventListAdapter
+    private lateinit var adapter: EventAdapter
 
     companion object {
 
@@ -46,12 +50,12 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViews()
-        initObservers()
+        initView()
+        collectUiState()
     }
 
     private fun initViews() {
-        adapter = EventListAdapter().apply {
+        /*adapter = EventListAdapter().apply {
             callback = object: EventListAdapter.Callback {
                 override fun onRequestAttendanceRecord(attendanceRecord: AttendanceRecord?) {
                     super.onRequestAttendanceRecord(attendanceRecord)
@@ -89,7 +93,7 @@ class NewsFragment : Fragment() {
             AppCompatResources.getDrawable(this@NewsFragment.requireContext(), R.drawable.drawable_line_divider)
                 ?.let { DividerItemDecoration(this@NewsFragment.requireContext(), it) }
                 ?.let { addItemDecoration(it) }
-        }
+        }*/
     }
 
     private fun navigateToEventDetail(key: String, eventType: String) {
@@ -103,11 +107,21 @@ class NewsFragment : Fragment() {
         transaction.commit()
     }
 
-    private fun initObservers() {
-        eventListVM.events.observe(viewLifecycleOwner) {
-            binding.progressBar.gone()
-            adapter.buildDataMap(it)
-            adapter.notifyDataSetChanged()
+    private fun initView() {
+        adapter = EventAdapter()
+        binding.rcvEvents.apply {
+            adapter = this@NewsFragment.adapter
+            AppCompatResources.getDrawable(this@NewsFragment.requireContext(), R.drawable.drawable_line_divider)
+                ?.let { DividerItemDecoration(this@NewsFragment.requireContext(), it) }
+                ?.let { addItemDecoration(it) }
+        }
+    }
+
+    private fun collectUiState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            userEventViewModel.getUserEvents().collectLatest { events ->
+                adapter.submitData(events)
+            }
         }
     }
 

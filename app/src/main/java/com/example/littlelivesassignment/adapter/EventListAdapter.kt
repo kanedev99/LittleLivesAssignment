@@ -9,7 +9,6 @@ import com.example.littlelivesassignment.adapter.listener.AdapterActionListener
 import com.example.littlelivesassignment.data.model.*
 import com.example.littlelivesassignment.databinding.ItemEventBinding
 import com.example.littlelivesassignment.databinding.ItemEventTitleSectionBinding
-import com.example.littlelivesassignment.presentation.item.ItemEvent
 import com.example.littlelivesassignment.utils.ext.toTitleDate
 
 class EventListAdapter
@@ -88,7 +87,7 @@ class EventListAdapter
 
     inner class EventListViewHolder(private val binding: ItemEventBinding): UserEventViewHolder(binding.root) {
         override fun bind(item: Any) {
-            binding.root.callback = object: ItemEvent.Callback {
+            /*binding.root.callback = object: ItemEvent.Callback {
                 override fun onClickItem() {
                     when ((item as UserEvent).type) {
                         EventType.CHECK_IN, EventType.CHECK_OUT -> {
@@ -109,7 +108,7 @@ class EventListAdapter
                     }
                 }
             }
-            binding.root.bind(item as UserEvent)
+            binding.root.bind(item as UserEvent)*/
         }
     }
 

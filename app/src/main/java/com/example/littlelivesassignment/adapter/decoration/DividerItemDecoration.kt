@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.littlelivesassignment.R
-import com.example.littlelivesassignment.adapter.EventListAdapter
+import com.example.littlelivesassignment.adapter.EventAdapter
 
 class DividerItemDecoration(context: Context, dividerDrawable: Drawable) : RecyclerView.ItemDecoration() {
     private val mDivider: Drawable = dividerDrawable
@@ -25,7 +25,7 @@ class DividerItemDecoration(context: Context, dividerDrawable: Drawable) : Recyc
 
             val position = parent.getChildAdapterPosition(child)
 
-            if (adapter.getItemViewType(position) == EventListAdapter.ITEM_TYPE) {
+            if (adapter.getItemViewType(position) != EventAdapter.TYPE_HEADER_DATE) {
                 mDivider.setBounds(0, top, parent.width, bottom)
                 mDivider.draw(c)
             }
@@ -42,7 +42,7 @@ class DividerItemDecoration(context: Context, dividerDrawable: Drawable) : Recyc
         val position = parent.getChildAdapterPosition(view)
         val viewType = adapter.getItemViewType(position)
 
-        if (viewType == EventListAdapter.TITLE_SECTION_TYPE) {
+        if (viewType == EventAdapter.TYPE_HEADER_DATE) {
             outRect.left    = 0
             outRect.right   = 0
             outRect.top     = 0
